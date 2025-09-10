@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yenva Resort</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <title>Yenva Resort Booking</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: whitesmoke;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+      }
+
+      .hero {
+        text-align: center;
+        padding: 40px 20px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        color: white;
+      }
+
+      .hero img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 15px;
+        margin-bottom: 20px;
+      }
+
+      .calendar-container {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+      }
+
+      .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .calendar-header button {
+        background: #ea580c;
+        border: none;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .calendar-header button:hover {
+        background: #ea580c;
+      }
+
+      .days-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 10px;
+        text-align: center;
+      }
+
+      .day {
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .day:hover {
+        background: #f0f0f0;
+      }
+
+      .day.selected {
+        background: #ea580c;
+        color: white;
+      }
+
+      .day.in-range {
+        background: #cce5ff;
+      }
+
+      .day.disabled {
+        color: #ccc;
+        cursor: not-allowed;
+      }
+
+      .weekdays {
+        font-weight: bold;
+        color: #555;
+      }
+
+      .selected-dates {
+        margin-top: 20px;
+        font-size: 18px;
+        text-align: center;
+      }
+
+      .booking-form {
+        margin-top: 30px;
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .book-btn {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        padding: 15px;
+        background: #ea580c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        transition: background 0.3s;
+      }
+
+      .book-btn:hover {
+        background: #ea580c;
+      }
+
+      .rooms-section {
+        padding: 40px 0px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.9);
+        color: #ea580c;
+        margin: 20px auto 60px;
+        border-radius: 15px;
+      }
+
+      .rooms-gallery {
+        display: flex;
+        flex-direction: column;
+
+        gap: 20px;
+        flex-wrap: nowrap;
+
+        justify-content: center;
+        margin-top: 20px;
+        padding: 0 20px;
+      }
+
+      .room-card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+        width: 100%;
+
+        padding: 15px;
+        text-align: left;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 0 auto;
+      }
+
+      .room-img {
+        width: 200px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-right: 15px;
+      }
+
+      .room-title {
+        font-weight: 700;
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+        text-align: left;
+      }
+
+      .room-desc {
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+        color: #555;
+        flex-grow: 1;
+      }
+
+      .room-book-btn {
+        background: #ea580c;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: auto;
+        /* Changed to auto */
+        font-weight: 600;
+        transition: background 0.3s;
+      }
+
+      .room-book-btn:hover {
+        background: #ea580c;
+      }
+
+      @media (max-width: 100%) {
+        .calendar-container,
+        .booking-form,
+        .rooms-section {
+          padding: 15px;
+        }
+
+        .days-grid {
+          gap: 5px;
+        }
+
+        .day {
+          padding: 8px;
+          font-size: 14px;
+        }
+
+        .rooms-gallery {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .room-card {
+          width: 90%;
+          flex-direction: column;
+          /* Changed to column */
+        }
+
+        .room-img {
+          width: 100%;
+          margin-right: 0;
+          margin-bottom: 10px;
+        }
+
+        .room-title {
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <img
+              src="logo.png"
+              alt="Yenva Resort Logo"
+              style="width: 120px; height: 48px; object-fit: contain"
+            />
+          </div>
+
+          <!-- Desktop Menu -->
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-4">
+              <a
+                href="index.html"
+                class="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium"
+                >Home</a
+              >
+              <a
+                href=""
+                class="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium"
+                >Cuisine</a
+              >
+              <a
+                href="gallery.html"
+                class="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium"
+                >Gallery</a
+              >
+              <a
+                href="#testimonials"
+                class="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium"
+                >Review</a
+              >
+              <div class="relative booking-dropdown">
+                <button
+                  class="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium flex items-center"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Bookings
+                  <svg
+                    class="ml-1 h-4 w-4 fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      d="M5.516 7.548l4.484 4.484 4.484-4.484L15.484 9l-5.484 5.484L4.516 9z"
+                    />
+                  </svg>
+                </button>
+                <div
+                  class="absolute left-0 mt-2 w-40 bg-white rounded-md shadow-lg opacity-0 invisible transition-opacity duration-200 z-50"
+                >
+                  <a
+                    href="#rooms"
+                    class="block px-4 py-2 text-gray-700 hover:bg-orange-600 hover:text-white rounded-md"
+                    >Suite</a
+                  >
+                  <a
+                    href="#events"
+                    class="block px-4 py-2 text-gray-700 hover:bg-orange-600 hover:text-white rounded-md"
+                    >Events / Venue</a
+                  >
+                  <a
+                    href="#spa"
+                    class="block px-4 py-2 text-gray-700 hover:bg-orange-600 hover:text-white rounded-md"
+                    >SPA</a
+                  >
+                </div>
+              </div>
+              <a
+                href="login.html"
+                class="bg-orange-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-orange-700"
+                >Get Started</a
+              >
+            </div>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="md:hidden">
+            <button
+              id="mobileMenuBtn"
+              type="button"
+              class="text-gray-700 hover:text-orange-600 focus:outline-none"
+            >
+              <i class="fas fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu (hidden by default) -->
+      <div id="mobileMenu" class="hidden md:hidden px-4 pb-3 space-y-2">
+        <a
+          href="index.html"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Home</a
+        >
+        <a
+          href=""
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Cuisine</a
+        >
+        <a
+          href="#features"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Gallery</a
+        >
+        <a
+          href="booking.html"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Suits</a
+        >
+        <a
+          href="#testimonials"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Event & Vneue</a
+        >
+        <a
+          href="#testimonials"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >SPA</a
+        >
+        <a
+          href="#testimonials"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Review</a
+        >
+        <a
+          href="login.html"
+          class="block bg-orange-600 text-white px-4 py-2 rounded-md text-base font-medium hover:bg-orange-700"
+          >Get Started</a
+        >
+      </div>
+    </nav>
+
+    <div class="hero">
+      <h1>Welcome to Yenva Resort</h1>
+      <p>Escape to paradise with serene views and luxurious amenities.</p>
+      <img
+        src="banner.webp"
+        alt="Vibrant tropical beach at Yenva Resort with crystal-clear turquoise water, white sand, swaying palm trees, and resort bungalows with thatched roofs under a sunny sky with scattered clouds"
+      />
+    </div>
+    <div class="container">
+      <div class="calendar-container" id="calendar">
+        <div class="calendar-header">
+          <button id="prev-month">&laquo; Previous</button>
+          <h2 id="month-year"></h2>
+          <button id="next-month">Next &raquo;</button>
+        </div>
+        <div class="days-grid" id="days-grid"></div>
+      </div>
+      <div class="selected-dates">
+        <p id="date-display">Selected Dates: None</p>
+      </div>
+
+      <form class="booking-form" id="booking-form" novalidate>
+        <h3>Customer Details</h3>
+        <div class="mb-3">
+          <label for="customer-name" class="form-label">Full Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="customer-name"
+            placeholder="Enter your full name"
+            required
+          />
+          <div class="invalid-feedback">Please enter your name.</div>
+        </div>
+        <div class="mb-3">
+          <label for="customer-email" class="form-label">Email Address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="customer-email"
+            placeholder="Enter your email address"
+            required
+          />
+          <div class="invalid-feedback">
+            Please enter a valid email address.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="customer-contact" class="form-label"
+            >Contact Number</label
+          >
+          <input
+            type="tel"
+            class="form-control"
+            id="customer-contact"
+            placeholder="Enter your contact number"
+            pattern="^\+?[0-9\s\-]{7,15}$"
+            required
+          />
+          <div class="invalid-feedback">
+            Please enter a valid contact number.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="num-members" class="form-label">Number of Members</label>
+          <input
+            type="number"
+            class="form-control"
+            id="num-members"
+            placeholder="Enter number of members"
+            min="1"
+            max="10"
+            required
+          />
+          <div class="invalid-feedback">
+            Please enter a valid number of members (1-10).
+          </div>
+        </div>
+        <button type="submit" class="book-btn" id="book-btn">Book Now</button>
+      </form>
+
+      <div class="rooms-section" id="rooms-section">
+        <h2>Deluxe Rooms</h2>
+        <p>Choose your preferred deluxe room and book it directly.</p>
+        <div class="rooms-gallery">
+          <div class="room-card" data-room="Ocean View Deluxe ">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0aa9d585-e490-4243-b1bb-3472cec7db51.png"
+              alt=" Deluxe ocean view room with king size bed, wooden furniture, large window overlooking turquoise sea, comfortable seating area, and modern decor"
+              class="room-img"
+            />
+            <div class="room-title">Heritage View Deluxe &nbsp;</div>
+            <div class="room-desc">
+              King size bed, heritage view, modern amenities, balcony with seating.
+            </div>
+            <button class="room-book-btn" type="button">Book This Room</button>
+          </div>
+          <div class="room-card" data-room="Elegant Deluxe">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bf9ce12f-0f67-4eca-b766-dc82214b31b3.png"
+              alt="Deluxe room interior featuring elegant bedding, flat screen TV, mini bar, spacious closet, and balcony access with tropical plants"
+              class="room-img"
+            />
+            <div class="room-title">Elegant Deluxe &nbsp;</div>
+            <div class="room-desc">
+              Elegant bedding, flat screen TV, minibar, balcony access.
+            </div>
+            <button class="room-book-btn" type="button">Book This Room</button>
+          </div>
+          <div class="room-card" data-room="Luxury Bathroom Deluxe">
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6be55487-5517-493d-848b-c1f284375b05.png"
+              alt="Luxurious bathroom in deluxe room with marble vanity, rain shower, double sinks, and fluffy robes hanging on the wall"
+              class="room-img"
+            />
+            <div class="room-title">Luxury Bathroom Deluxe &nbsp;</div>
+            <div class="room-desc">
+              Marble vanity, rain shower, double sinks, plush robes.
+            </div>
+            <button class="room-book-btn" type="button">Book This Room</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-xl font-bold mb-4 text-center">Yanva Resort</h3>
+            <p class="text-gray-400 text-center">
+              Yanva Simply Unforgettable | यंवा म्हुगु ग्वाहालु (Close to the
+              Heart).
+            </p>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4 text-center">Product</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li>
+                <a href="#" class="hover:text-white text-center">Features</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white text-center">Pricing</a>
+              </li>
+              <li><a href="#" class="hover:text-white text-center">Demo</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4 text-center">Support</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li>
+                <a href="#" class="hover:text-white text-center">Contact Us:</a>
+              </li>
+              <li>
+                <a class="hover:text-white text-center" href="tel:+97712345678"
+                  >+977-981234568</a
+                >
+              </li>
+              <li>
+                <a
+                  href="mailto:info@yanva.com"
+                  class="hover:text-white text-center"
+                  >info@yanva.com</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Social Media</h4>
+            <div class="flex space-x-4 text-center">
+              <a href="#" class="text-gray-400 hover:text-white">
+                <i class="fab fa-facebook"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white">
+                <i class="fab fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400"
+        >
+          <p>&copy; 2025 Yenva. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Calendar variables
+      let currentDate = new Date();
+      let selectedDates = [];
+      const monthYear = document.getElementById("month-year");
+      const daysGrid = document.getElementById("days-grid");
+      const dateDisplay = document.getElementById("date-display");
+      const bookingForm = document.getElementById("booking-form");
+      const nameInput = document.getElementById("customer-name");
+      const emailInput = document.getElementById("customer-email");
+      const contactInput = document.getElementById("customer-contact");
+      const membersInput = document.getElementById("num-members");
+
+      function renderCalendar(date) {
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        monthYear.textContent = date.toLocaleDateString("en-US", {
+          month: "long",
+          year: "numeric",
+        });
+
+        daysGrid.innerHTML = ``;
+
+        const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        weekdays.forEach((day) => {
+          const weekdayDiv = document.createElement("div");
+          weekdayDiv.classList.add("weekdays");
+          weekdayDiv.textContent = day;
+          daysGrid.appendChild(weekdayDiv);
+        });
+
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        const startDate = firstDay.getDay();
+        const endDate = lastDay.getDate();
+
+        for (let i = 0; i < startDate; i++) {
+          const emptyCell = document.createElement("div");
+          emptyCell.classList.add("day", "disabled");
+          daysGrid.appendChild(emptyCell);
+        }
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        for (let day = 1; day <= endDate; day++) {
+          const dayCell = document.createElement("div");
+          dayCell.textContent = day;
+          dayCell.classList.add("day");
+          const cellDate = new Date(year, month, day);
+
+          if (cellDate < today) {
+            dayCell.classList.add("disabled");
+          } else {
+            dayCell.addEventListener("click", () => selectDate(cellDate));
+          }
+
+          daysGrid.appendChild(dayCell);
+        }
+
+        updateSelection();
+      }
+
+      function selectDate(date) {
+        if (selectedDates.length < 2) {
+          selectedDates.push(date);
+        } else {
+          selectedDates = [date];
+        }
+        updateDisplay();
+        updateSelection();
+      }
+
+      function updateDisplay() {
+        if (selectedDates.length === 0) {
+          dateDisplay.textContent = "Selected Dates: None";
+        } else if (selectedDates.length === 1) {
+          dateDisplay.textContent = `Selected Entry Date: ${selectedDates[0].toLocaleDateString()}`;
+        } else {
+          const [start, end] = selectedDates.sort((a, b) => a - b);
+          dateDisplay.textContent = `Selected Dates: ${start.toLocaleDateString()} - ${end.toLocaleDateString()}`;
+        }
+      }
+
+      function updateSelection() {
+        const dayCells = document.querySelectorAll(".day:not(.disabled)");
+        dayCells.forEach((cell) => {
+          cell.classList.remove("selected", "in-range");
+        });
+
+        if (selectedDates.length === 1) {
+          dayCells.forEach((cell) => {
+            const cellDate = new Date(
+              currentDate.getFullYear(),
+              currentDate.getMonth(),
+              parseInt(cell.textContent)
+            );
+            if (cellDate.getTime() === selectedDates[0].getTime()) {
+              cell.classList.add("selected");
+            }
+          });
+        } else if (selectedDates.length === 2) {
+          const [start, end] = selectedDates.sort((a, b) => a - b);
+          dayCells.forEach((cell) => {
+            const cellDate = new Date(
+              currentDate.getFullYear(),
+              currentDate.getMonth(),
+              parseInt(cell.textContent)
+            );
+            if (
+              cellDate.getTime() === start.getTime() ||
+              cellDate.getTime() === end.getTime()
+            ) {
+              cell.classList.add("selected");
+            } else if (cellDate > start && cellDate < end) {
+              cell.classList.add("in-range");
+            }
+          });
+        }
+      }
+
+      document.getElementById("prev-month").addEventListener("click", () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        renderCalendar(currentDate);
+      });
+      document.getElementById("next-month").addEventListener("click", () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar(currentDate);
+      });
+
+      bookingForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        if (!bookingForm.checkValidity()) {
+          bookingForm.classList.add("was-validated");
+          return;
+        }
+
+        if (selectedDates.length !== 2) {
+          alert("Please select both entry and exit dates.");
+          return;
+        }
+
+        const [start, end] = selectedDates.sort((a, b) => a - b);
+
+        alert(
+          `Booking confirmed for ${nameInput.value}!\nEmail: ${
+            emailInput.value
+          }\nContact: ${contactInput.value}\nMembers: ${
+            membersInput.value
+          }\nDates: ${start.toLocaleDateString()} - ${end.toLocaleDateString()}`
+        );
+
+        bookingForm.reset();
+        bookingForm.classList.remove("was-validated");
+        selectedDates = [];
+        updateDisplay();
+        updateSelection();
+      });
+
+      // Room booking buttons
+      document.querySelectorAll(".room-book-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+          const roomCard = button.closest(".room-card");
+          const roomName = roomCard.getAttribute("data-room");
+
+          if (!bookingForm.checkValidity()) {
+            bookingForm.classList.add("was-validated");
+            alert("Please fill in all customer details before booking a room.");
+            return;
+          }
+
+          if (selectedDates.length !== 2) {
+            alert(
+              "Please select both entry and exit dates before booking a room."
+            );
+            return;
+          }
+
+          const [start, end] = selectedDates.sort((a, b) => a - b);
+
+          alert(
+            `Booking confirmed for ${nameInput.value}!\nEmail: ${
+              emailInput.value
+            }\nContact: ${contactInput.value}\nMembers: ${
+              membersInput.value
+            }\nRoom: ${roomName}\nDates: ${start.toLocaleDateString()} - ${end.toLocaleDateString()}`
+          );
+
+          bookingForm.reset();
+          selectedDates = [];
+          updateDisplay();
+          updateSelection();
+        });
+      });
+
+      renderCalendar(currentDate);
+    </script>
+  </body>
+</html>

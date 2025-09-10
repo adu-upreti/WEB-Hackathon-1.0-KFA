@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yenva Resort</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Yenva Login</title>
+
+
+<style>
+    .form-container {
+        transform: translateX(0);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .form-container.slide-left {
+        transform: translateX(-100%);
+    }
+
+    .form-wrapper {
+        width: 200%;
+        display: flex;
+    }
+
+    .form-panel {
+        width: 50%;
+        flex-shrink: 0;
+    }
+
+    .auth-container {
+        overflow: hidden;
+        position: relative;
+    }
+</style>
+
+<body class="bg-gray-50 min-h-screen">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <img
+              src="logo.png"
+              alt="Yenva Resort Logo"
+              style="width: 120px; height: 48px; object-fit: contain;"
+            />
+          </div>
+
+          <!-- Desktop Menu -->
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-4">
+              <a
+                href="index.html"
+                class="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium"
+                >Home</a
+              >
+              <a
+                href=""
+                class="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium"
+                >Cuisine</a
+              >
+              <a
+                href="gallery.html"
+                class="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium"
+                >Gallery</a
+              >
+              <a
+                href="#testimonials"
+                class="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium"
+                >Review</a
+              >
+<div class="relative booking-dropdown">
+  <button
+    class="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium flex items-center"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    Bookings
+    <svg
+      class="ml-1 h-4 w-4 fill-current"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 20"
+    >
+      <path
+        d="M5.516 7.548l4.484 4.484 4.484-4.484L15.484 9l-5.484 5.484L4.516 9z"
+      />
+    </svg>
+  </button>
+  <div
+    class="absolute left-0 mt-2 w-40 bg-white rounded-md shadow-lg opacity-0 invisible transition-opacity duration-200 z-50"
+  >
+    <a
+      href="#rooms"
+      class="block px-4 py-2 text-gray-700 hover:bg-orange-600 hover:text-white rounded-md"
+      >Suite</a
+    >
+    <a
+      href="#events"
+      class="block px-4 py-2 text-gray-700 hover:bg-orange-600 hover:text-white rounded-md"
+      >Events / Venue</a
+    >
+    <a
+      href="#spa"
+      class="block px-4 py-2 text-gray-700 hover:bg-orange-600 hover:text-white rounded-md"
+      >SPA</a
+    >
+  </div>
+</div>
+              <a
+                href="login.html"
+                class="bg-orange-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-orange-700"
+                >Get Started</a
+              >
+            </div>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="md:hidden">
+            <button
+              id="mobileMenuBtn"
+              type="button"
+              class="text-gray-700 hover:text-orange-600 focus:outline-none"
+            >
+              <i class="fas fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu (hidden by default) -->
+      <div id="mobileMenu" class="hidden md:hidden px-4 pb-3 space-y-2">
+        <a
+          href="index.html"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Home</a
+        >
+        <a
+          href=""
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Cuisine</a
+        >
+        <a
+          href="#features"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Gallery</a
+        >
+        <a
+          href="booking.html"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Suits</a
+        >
+        <a
+          href="#testimonials"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Event & Vneue</a
+        >
+        <a
+          href="#testimonials"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >SPA</a
+        >
+        <a
+          href="#testimonials"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Review</a
+        >
+        <a
+          href="login.html"
+          class="block bg-orange-600 text-white px-4 py-2 rounded-md text-base font-medium hover:bg-orange-700"
+          >Get Started</a
+        >
+      </div>
+    </nav>
+
+
+    <!-- Auth Section -->
+    <section
+        class="pt-16 min-h-screen bg-gradient-to-br from-orange-50 to-red-50 flex items-center justify-center py-12">
+        <div class="max-w-md w-full mx-4">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">.</h1>
+                <p class="text-gray-600">Yanva Simply Unforgettable | यंवा म्हुगु ग्वाहालु (Close to the Heart).</p>
+                <div class="flex bg-white rounded-lg p-1 mt-6 shadow-sm">
+                    <button id="loginTab"
+                        class="flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200 bg-orange-600 text-white">
+                        Login
+                    </button>
+                    <button id="registerTab"
+                        class="flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200 text-gray-600 hover:text-orange-600">
+                        Register
+                    </button>
+                </div>
+            </div>
+
+            <!-- Forms Container -->
+            <div class="auth-container bg-white rounded-xl shadow-xl overflow-hidden">
+                <div class="form-container" id="formContainer">
+                    <div class="form-wrapper">
+                        <!-- Login Form -->
+                        <div class="form-panel">
+                            <div class="p-8">
+                                <div class="text-center mb-6">
+                                    <i class="fas fa-sign-in-alt text-4xl text-orange-600 mb-4"></i>
+                                    <h2 class="text-2xl font-bold text-gray-900">Sign In</h2>
+                                    <p class="text-gray-600 mt-2">Welcome back to your restaurant dashboard</p>
+                                </div>
+
+                                <form method="post" action="{% url 'signup' %}" class="space-y-6" id="loginForm">
+
+                                    <div>
+                                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <i class="fas fa-envelope text-orange-600 mr-2"></i>Email Address
+                                        </label>
+                                        <input type="email" id="email" name="email" required
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                                            placeholder="Enter your email">
+                                    </div>
+
+                                    <div>
+                                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <i class="fas fa-lock text-orange-600 mr-2"></i>Password
+                                        </label>
+                                        <input type="password" id="password" name="password" required
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                                            placeholder="Enter your password">
+                                    </div>
+
+                                    <div class="flex items-center justify-between">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" name="remember_me"
+                                                class="rounded border-gray-300 text-orange-600 focus:ring-orange-500">
+                                            <span class="ml-2 text-sm text-gray-600">Remember me</span>
+                                        </label>
+                                        <a href="#" class="text-sm text-orange-600 hover:text-orange-700">Forgot
+                                            password?</a>
+                                    </div>
+
+                                    <button type="submit"
+                                        class="w-full bg-orange-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-orange-700 transition-colors duration-200">
+                                        Sign In
+                                    </button>
+
+                                    <div class="relative">
+                                        <div class="absolute inset-0 flex items-center">
+                                            <div class="w-full border-t border-gray-300"></div>
+                                        </div>
+                                        <div class="relative flex justify-center text-sm">
+                                            <span class="px-2 bg-white text-gray-500">or continue with</span>
+                                        </div>
+                                    </div>
+
+                                    <button type="button"
+                                        class="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                                        <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google"
+                                            class="w-5 h-5 mr-3">
+                                        <span class="text-gray-700 font-medium">Continue with Google</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Register Form -->
+                        <div class="form-panel">
+                            <div class="p-8">
+                                <div class="text-center mb-6">
+                                    <i class="fas fa-user-plus text-4xl text-orange-600 mb-4"></i>
+                                    <h2 class="text-2xl font-bold text-gray-900">Create Account</h2>
+                                    <p class="text-gray-600 mt-2">Start your digital journey with us today</p>
+                                </div>
+
+                                <form method="post" action="{% url 'signup' %}" class="space-y-6" id="registerForm">
+
+                                    <div>
+                                        <label for="Full Name" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <i class="fas fa-user text-orange-600 mr-2"></i>Full Name
+                                        </label>
+                                        <input type="text" id="Name" name="Name" required
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                                            placeholder="Enter your Your Full name">
+                                    </div>
+
+                                    <div>
+                                        <label for="phoneNumber" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <i class="fas fa-phone text-orange-600 mr-2"></i>Phone Number
+                                        </label>
+                                        <input type="tel" id="phoneNumber" name="phoneNumber" required
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                                            placeholder="Enter your phone number">
+                                    </div>
+
+                                    <div>
+                                        <label for="registerEmail" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <i class="fas fa-envelope text-orange-600 mr-2"></i>Email Address
+                                        </label>
+                                        <input type="email" id="registerEmail" name="registerEmail" required
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                                            placeholder="Enter your email address">
+                                    </div>
+
+                                    <div>
+                                        <label for="registerPassword"
+                                            class="block text-sm font-medium text-gray-700 mb-2">
+                                            <i class="fas fa-lock text-orange-600 mr-2"></i>Password
+                                        </label>
+                                        <input type="password" id="registerPassword" name="registerPassword" required
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                                            placeholder="Create a secure password" minlength="8">
+                                    </div>
+
+                                    <div class="flex items-start">
+                                        <input type="checkbox" id="terms" name="terms" required
+                                            class="mt-1 rounded border-gray-300 text-orange-600 focus:ring-orange-500">
+                                        <label for="terms" class="ml-2 text-sm text-gray-600">
+                                            I agree to the <a href="#"
+                                                class="text-orange-600 hover:text-orange-700">Terms of Service</a> and
+                                            <a href="#" class="text-orange-600 hover:text-orange-700">Privacy Policy</a>
+                                        </label>
+                                    </div>
+
+                                    <button type="submit"
+                                        class="w-full bg-orange-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-orange-700 transition-colors duration-200">
+                                        Create Account
+                                    </button>
+
+                                    <div class="relative">
+                                        <div class="absolute inset-0 flex items-center">
+                                            <div class="w-full border-t border-gray-300"></div>
+                                        </div>
+                                        <div class="relative flex justify-center text-sm">
+                                            <span class="px-2 bg-white text-gray-500">or continue with</span>
+                                        </div>
+                                    </div>
+
+                                    <button type="button"
+                                        class="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                                        <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google"
+                                            class="w-5 h-5 mr-3">
+                                        <span class="text-gray-700 font-medium">Continue with Google</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="text-center mt-8">
+                <div class="flex items-center justify-center space-x-8 text-sm text-gray-600">
+                </div>
+                <i class="fas fa-headset text-orange-600 mr-2"></i>
+                24/7 Support
+            </div>
+        </div>
+        </div>
+        </div>
+    </section>
+
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Form switching functionality
+            const loginTab = document.getElementById('loginTab');
+            const registerTab = document.getElementById('registerTab');
+            const formContainer = document.getElementById('formContainer');
+
+            // Check if there are success messages for registration
+            const messages = document.querySelectorAll('.alert');
+            let hasSuccessMessage = false;
+            messages.forEach(message => {
+                if (message.textContent.includes('Account created successfully')) {
+                    hasSuccessMessage = true;
+                }
+            });
+
+            // If registration was successful, show login form
+            if (hasSuccessMessage) {
+                showLoginForm();
+            }
+
+            function showLoginForm() {
+                formContainer.classList.remove('slide-left');
+                loginTab.classList.add('bg-orange-600', 'text-white');
+                loginTab.classList.remove('text-gray-600', 'hover:text-orange-600');
+                registerTab.classList.remove('bg-orange-600', 'text-white');
+                registerTab.classList.add('text-gray-600', 'hover:text-orange-600');
+            }
+
+            function showRegisterForm() {
+                formContainer.classList.add('slide-left');
+                registerTab.classList.add('bg-orange-600', 'text-white');
+                registerTab.classList.remove('text-gray-600', 'hover:text-orange-600');
+                loginTab.classList.remove('bg-orange-600', 'text-white');
+                loginTab.classList.add('text-gray-600', 'hover:text-orange-600');
+            }
+
+            loginTab.addEventListener('click', showLoginForm);
+            registerTab.addEventListener('click', showRegisterForm);
+        });
+    </script>
+</body>
+
+</html>

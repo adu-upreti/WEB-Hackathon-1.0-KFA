@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yenva Resort</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Resort Gallery</title>
+
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      /* Gallery Styles */
+      .gallery-container {
+        padding: 20px;
+      }
+
+      .gallery-item {
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 200px;
+        /* Fixed height */
+        object-fit: cover;
+        /* Maintain aspect ratio and cover the area */
+        border-radius: 8px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px 5px rgba(234, 88, 12, 0.5);
+      }
+
+      /* Modal Styles */
+      .modal-dialog {
+        max-width: 800px;
+        margin: 1.75rem auto;
+      }
+
+      .modal-content {
+        border-radius: 10px;
+      }
+
+      .modal-header {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
+      }
+
+      .modal-title {
+        font-weight: bold;
+      }
+
+      .modal-body {
+        padding: 20px;
+      }
+
+      .modal-footer {
+        border-top: 1px solid #dee2e6;
+      }
+
+      /* See More Button */
+      .see-more-button {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      /* Hidden by default */
+      .hidden {
+        display: none;
+      }
+
+      /* Image Title and Description */
+      .image-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        /* Black background by default */
+        color: white;
+        padding: 10px;
+        text-align: center;
+        opacity: 1;
+        /* Make visible by default */
+        transition: opacity 0.3s ease, background-color 0.3s ease;
+      }
+
+      .gallery-item:hover .image-info {
+        background-color: #ea580c;
+        /* Orange background on hover */
+      }
+
+      .image-info h5 {
+        margin-bottom: 10px;
+        /* gap between name and discription */
+      }
+
+      .image-info p {
+        font-size: 0.9rem;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <img
+              src="logo.png"
+              alt="Yenva Resort Logo"
+              style="width: 120px; height: 48px; object-fit: contain"
+            />
+          </div>
+
+          <!-- Desktop Menu -->
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-4">
+              <a
+                href="index.html"
+                class="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium"
+                >Home</a
+              >
+              <a
+                href=""
+                class="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium"
+                >Cuisine</a
+              >
+              <a
+                href="gallery.html"
+                class="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium"
+                >Gallery</a
+              >
+              <a
+                href="#testimonials"
+                class="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium"
+                >Review</a
+              >
+              <div class="relative booking-dropdown">
+                <button
+                  class="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium flex items-center"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Bookings
+                  <svg
+                    class="ml-1 h-4 w-4 fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      d="M5.516 7.548l4.484 4.484 4.484-4.484L15.484 9l-5.484 5.484L4.516 9z"
+                    />
+                  </svg>
+                </button>
+                <div
+                  class="absolute left-0 mt-2 w-40 bg-white rounded-md shadow-lg opacity-0 invisible transition-opacity duration-200 z-50"
+                >
+                  <a
+                    href="#rooms"
+                    class="block px-4 py-2 text-gray-700 hover:bg-orange-600 hover:text-white rounded-md"
+                    >Suite</a
+                  >
+                  <a
+                    href="#events"
+                    class="block px-4 py-2 text-gray-700 hover:bg-orange-600 hover:text-white rounded-md"
+                    >Events / Venue</a
+                  >
+                  <a
+                    href="#spa"
+                    class="block px-4 py-2 text-gray-700 hover:bg-orange-600 hover:text-white rounded-md"
+                    >SPA</a
+                  >
+                </div>
+              </div>
+              <a
+                href="login.html"
+                class="bg-orange-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-orange-700"
+                >Get Started</a
+              >
+            </div>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="md:hidden">
+            <button
+              id="mobileMenuBtn"
+              type="button"
+              class="text-gray-700 hover:text-orange-600 focus:outline-none"
+            >
+              <i class="fas fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu (hidden by default) -->
+      <div id="mobileMenu" class="hidden md:hidden px-4 pb-3 space-y-2">
+        <a
+          href="index.html"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Home</a
+        >
+        <a
+          href=""
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Cuisine</a
+        >
+        <a
+          href="#features"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Gallery</a
+        >
+        <a
+          href="booking.html"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Suits</a
+        >
+        <a
+          href="#testimonials"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Event & Vneue</a
+        >
+        <a
+          href="#testimonials"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >SPA</a
+        >
+        <a
+          href="#testimonials"
+          class="block text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-base font-medium"
+          >Review</a
+        >
+        <a
+          href="login.html"
+          class="block bg-orange-600 text-white px-4 py-2 rounded-md text-base font-medium hover:bg-orange-700"
+          >Get Started</a
+        >
+      </div>
+    </nav>
+
+    <div class="container gallery-container">
+      <h1 class="text-center mb-4">Resort Gallery</h1>
+      <div class="row" id="gallery-row">
+        <!-- Gallery Item 1 -->
+        <div
+          class="col-lg-4 col-md-6 gallery-item"
+          data-bs-toggle="modal"
+          data-bs-target="#imageModal1"
+        >
+          <img src="hall.jpeg" alt="Resort Image 1" />
+          <div class="image-info">
+            <h5>Entrance Hall</h5>
+            <p>
+              First impressions that last—a welcoming hall designed for comfort,
+              beauty, and relaxation
+            </p>
+          </div>
+        </div>
+        <!-- Gallery Item 2 -->
+        <div
+          class="col-lg-4 col-md-6 gallery-item"
+          data-bs-toggle="modal"
+          data-bs-target="#imageModal2"
+        >
+          <img src="gym.jpeg" alt="Resort Image 2" />
+          <div class="image-info">
+            <h5>Luxury Gym</h5>
+            <p>
+              Work out in style: a fully equipped gym designed for every fitness
+              level.
+            </p>
+          </div>
+        </div>
+        <!-- Gallery Item 3 -->
+        <div
+          class="col-lg-4 col-md-6 gallery-item"
+          data-bs-toggle="modal"
+          data-bs-target="#imageModal3"
+        >
+          <img src="private-dining.jpeg" alt="Resort Image 3" />
+          <div class="image-info">
+            <h5>DIning</h5>
+            <p>Delicious food.</p>
+          </div>
+        </div>
+        <!-- Gallery Item 4 -->
+        <div
+          class="col-lg-4 col-md-6 gallery-item"
+          data-bs-toggle="modal"
+          data-bs-target="#imageModal4"
+        >
+          <img src="images.jpeg" alt="Resort Image 4" />
+          <div class="image-info">
+            <h5>Pool Area</h5>
+            <p>Relax by the pool.</p>
+          </div>
+        </div>
+        <!-- Gallery Item 5 -->
+        <div
+          class="col-lg-4 col-md-6 gallery-item"
+          data-bs-toggle="modal"
+          data-bs-target="#imageModal5"
+        >
+          <img src="private-dining.jpeg" alt="Resort Image 5" />
+          <div class="image-info">
+            <h5>Living Goddess</h5>
+            <p>She is the living goddess.</p>
+          </div>
+        </div>
+        <!-- Gallery Item 6 -->
+        <div
+          class="col-lg-4 col-md-6 gallery-item"
+          data-bs-toggle="modal"
+          data-bs-target="#imageModal6"
+        >
+          <img src="lexuary.jpeg" alt="Resort Image 6" />
+          <div class="image-info">
+            <h5>A lexuary Bed Room</h5>
+            <p>We provide a lexuary room fo r your comfort</p>
+          </div>
+        </div>
+
+        <!-- Hidden Gallery Items (will be shown when "See More" is clicked) -->
+        <div
+          class="col-lg-4 col-md-6 gallery-item hidden"
+          data-bs-toggle="modal"
+          data-bs-target="#imageModal7"
+        >
+          <img src="cult.jpeg" alt="Resort Image 7" />
+          <div class="image-info">
+            <h5>Newari Culture</h5>
+            <p>Newari festival Called jatra.</p>
+          </div>
+        </div>
+        <div
+          class="col-lg-4 col-md-6 gallery-item hidden"
+          data-bs-toggle="modal"
+          data-bs-target="#imageModal8"
+        >
+          <img src="pool.jpg" alt="Resort Image 8" />
+          <div class="image-info">
+            <h5>Swimming pool</h5>
+            <p>Welcome to our pool.</p>
+          </div>
+        </div>
+        <div
+          class="col-lg-4 col-md-6 gallery-item hidden"
+          data-bs-toggle="modal"
+          data-bs-target="#imageModal9"
+        >
+          <img
+            src="https://via.placeholder.com/400x300?text=Image+9"
+            alt="Resort Image 9"
+          />
+          <div class="image-info">
+            <h5>Bar Lounge</h5>
+            <p>Enjoy our cocktails.</p>
+          </div>
+        </div>
+      </div>
+      <!-- See More Button -->
+      <div class="see-more-button">
+        <button class="btn btn-primary" id="see-more-button">See More</button>
+      </div>
+    </div>
+
+    <!-- Image Modal 1 -->
+    <div
+      class="modal fade"
+      id="imageModal1"
+      tabindex="-1"
+      aria-labelledby="imageModalLabel1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imageModalLabel1">Beautiful View</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <img
+              src="https://via.placeholder.com/800x600?text=Image+1"
+              class="img-fluid"
+              alt="Resort Image 1"
+            />
+            <p>
+              Enjoy the serene view from our resort. This image captures the
+              essence of relaxation and natural beauty.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Image Modal 2 -->
+    <div
+      class="modal fade"
+      id="imageModal2"
+      tabindex="-1"
+      aria-labelledby="imageModalLabel2"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imageModalLabel2">Luxury Rooms</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <img
+              src="https://via.placeholder.com/800x600?text=Image+2"
+              class="img-fluid"
+              alt="Resort Image 2"
+            />
+            <p>
+              Experience our luxurious and comfortable rooms. Each room is
+              designed for your utmost comfort and relaxation.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Image Modal 3 -->
+    <div
+      class="modal fade"
+      id="imageModal3"
+      tabindex="-1"
+      aria-labelledby="imageModalLabel3"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imageModalLabel3">Delicious Food</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <img src="bar.jpeg" class="img-fluid" alt="Resort Image 3" />
+            <p>Enjoy Your drinks.</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Image Modal 4 -->
+    <div
+      class="modal fade"
+      id="imageModal4"
+      tabindex="-1"
+      aria-labelledby="imageModalLabel4"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imageModalLabel4">Swimming Pool</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <img
+              src="https://via.placeholder.com/800x600?text=Image+4"
+              class="img-fluid"
+              alt="Resort Image 4"
+            />
+            <p>
+              Relax and have fun in our amazing swimming pool. It's the perfect
+              place to unwind and enjoy the sun.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Image Modal 5 -->
+    <div
+      class="modal fade"
+      id="imageModal5"
+      tabindex="-1"
+      aria-labelledby="imageModalLabel5"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imageModalLabel5">Spa & Wellness</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <img
+              src="https://via.placeholder.com/800x600?text=Image+5"
+              class="img-fluid"
+              alt="Resort Image 5"
+            />
+            <p>
+              Rejuvenate your body and mind in our spa. Our spa services are
+              designed to provide ultimate relaxation and wellness.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Image Modal 6 -->
+    <div
+      class="modal fade"
+      id="imageModal6"
+      tabindex="-1"
+      aria-labelledby="imageModalLabel6"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imageModalLabel6">Event Hosting</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <img
+              src="https://via.placeholder.com/800x600?text=Image+6"
+              class="img-fluid"
+              alt="Resort Image 6"
+            />
+            <p>
+              Host your events with us for a memorable experience. We offer
+              state-of-the-art facilities and personalized service to make your
+              event a success.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image Modal 7 -->
+    <div
+      class="modal fade"
+      id="imageModal7"
+      tabindex="-1"
+      aria-labelledby="imageModalLabel7"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imageModalLabel7">
+              Another Great View
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <img
+              src="https://via.placeholder.com/800x600?text=Image+7"
+              class="img-fluid"
+              alt="Resort Image 7"
+            />
+            <p>Enjoy another serene view from our resort.</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image Modal 8 -->
+    <div
+      class="modal fade"
+      id="imageModal8"
+      tabindex="-1"
+      aria-labelledby="imageModalLabel8"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imageModalLabel8">Relaxing Poolside</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <img
+              src="https://via.placeholder.com/800x600?text=Image+8"
+              class="img-fluid"
+              alt="Resort Image 8"
+            />
+            <p>Relax by the poolside and soak up the sun.</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image Modal 9 -->
+    <div
+      class="modal fade"
+      id="imageModal9"
+      tabindex="-1"
+      aria-labelledby="imageModalLabel9"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imageModalLabel9">
+              Delicious Cocktails
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <img
+              src="https://via.placeholder.com/800x600?text=Image+9"
+              class="img-fluid"
+              alt="Resort Image 9"
+            />
+            <p>Enjoy our delicious cocktails at the bar.</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-xl font-bold mb-4 text-center">Yanva Resort</h3>
+            <p class="text-gray-400 text-center">
+              Yanva Simply Unforgettable | यंवा म्हुगु ग्वाहालु (Close to the
+              Heart).
+            </p>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4 text-center">Product</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li>
+                <a href="#" class="hover:text-white text-center">Features</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white text-center">Pricing</a>
+              </li>
+              <li><a href="#" class="hover:text-white text-center">Demo</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4 text-center">Support</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li>
+                <a href="#" class="hover:text-white text-center">Contact Us:</a>
+              </li>
+              <li>
+                <a class="hover:text-white text-center" href="tel:+97712345678"
+                  >+977-981234568</a
+                >
+              </li>
+              <li>
+                <a
+                  href="mailto:info@yanva.com"
+                  class="hover:text-white text-center"
+                  >info@yanva.com</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Social Media</h4>
+            <div class="flex space-x-4 text-center">
+              <a href="#" class="text-gray-400 hover:text-white">
+                <i class="fab fa-facebook"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white">
+                <i class="fab fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400"
+        >
+          <p>&copy; 2025 Yenva. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS (optional, but needed for some features) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document
+        .getElementById("see-more-button")
+        .addEventListener("click", function () {
+          // Get all hidden gallery items
+          const hiddenItems = document.querySelectorAll(".gallery-item.hidden");
+
+          // Loop through the hidden items and remove the "hidden" class
+          hiddenItems.forEach((item) => {
+            item.classList.remove("hidden");
+          });
+
+          // Hide the "See More" button (optional)
+          this.style.display = "none"; // or this.classList.add('hidden');
+        });
+    </script>
+  </body>
+</html>

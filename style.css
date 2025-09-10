@@ -1,0 +1,436 @@
+
+/* Custom styles for form elements */
+.form-input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-size: 0.875rem;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #ea580c;
+    box-shadow: 0 0 0 2px rgba(234, 88, 12, 0.2);
+}
+
+.form-select {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    background-color: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-size: 0.875rem;
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: #ea580c;
+    box-shadow: 0 0 0 2px rgba(234, 88, 12, 0.2);
+}
+
+.form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+    background-color: #ea580c;
+    color: white;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.375rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.btn-primary:hover {
+    background-color: #c2410c;
+    transform: scale(1.05);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Animation for the entire form */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-in {
+    animation: slideInUp 0.6s ease-out;
+}
+
+/* Booking section specific styles */
+.booking-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #ffffff 0%, #fff7ed 50%, #ffffff 100%);
+}
+
+.booking-container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.booking-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: slideInUp 0.6s ease-out;
+}
+
+.booking-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1rem;
+}
+
+.booking-subtitle {
+    font-size: 1.125rem;
+    color: #4b5563;
+    max-width: 42rem;
+    margin: 0 auto;
+}
+
+.booking-form-wrapper {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    padding: 2.5rem;
+    animation: slideInUp 0.6s ease-out 0.3s both;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-grid-main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: end;
+}
+
+.form-grid-secondary {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: end;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    pointer-events: none;
+}
+
+.form-icon {
+    color: #ea580c;
+    margin-right: 0.5rem;
+}
+
+.optional-text {
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-weight: 400;
+    margin-left: 0.25rem;
+}
+
+.booking-info {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.info-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    font-size: 0.875rem;
+    color: #4b5563;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+}
+
+.info-icon-green {
+    color: #10b981;
+    margin-right: 0.5rem;
+}
+
+.info-icon-blue {
+    color: #3b82f6;
+    margin-right: 0.5rem;
+}
+
+.info-icon-orange {
+    color: #f97316;
+    margin-right: 0.5rem;
+}
+
+/* Responsive styles */
+@media (min-width: 768px) {
+    .booking-container {
+        padding: 0 1.5rem;
+    }
+    
+    .booking-form-wrapper {
+        padding: 2.5rem;
+    }
+    
+    .form-grid-main {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    
+    .form-grid-secondary {
+        grid-template-columns: 2fr 1fr;
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .booking-container {
+        padding: 0 2rem;
+    }
+    
+    .booking-title {
+        font-size: 3rem;
+    }
+    
+    .form-grid-main {
+        grid-template-columns: 2fr 2fr 1fr 1fr;
+        gap: 1.5rem;
+    }
+    
+    .form-grid-secondary {
+        grid-template-columns: 2fr 1fr;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .booking-section {
+        padding: 2rem 0;
+    }
+    
+    .booking-form-wrapper {
+        padding: 1.5rem;
+    }
+    
+    .booking-title {
+        font-size: 1.875rem;
+    }
+    
+    .form-grid-main {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .form-grid-secondary {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .info-list {
+        gap: 1rem;
+        font-size: 0.8rem;
+    }
+}
+
+
+
+      /* Custom styles for the video banner */
+    .sc-989e922c-0 {
+        position: relative;
+        width: 100%;
+        height: 60vh;
+        overflow: hidden;
+    }
+
+    .sc-989e922c-1 {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    @media (min-width: 768px) {
+        .sc-989e922c-0 {
+        height: 80vh;
+        }
+    }
+
+
+
+/* Orange background for the entire datepicker */
+.ui-datepicker {
+  background-color: #f97316; /* Tailwind's bg-orange-500 hex */
+  border: none;
+  color: white;
+  font-weight: 600;
+}
+
+/* Date cells text color */
+.ui-datepicker td a {
+  color: white;
+  background-color: transparent;
+  border-radius: 0.25rem; /* rounded corners */
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+}
+
+/* Hover effect on date cells */
+.ui-datepicker td a:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+/* Selected date box with white background and orange text */
+.ui-datepicker .ui-state-active,
+.ui-datepicker .ui-state-active:hover {
+  background-color: white !important;
+  color: #f97316 !important; /* bg-orange-500 text */
+  font-weight: 700;
+  border-radius: 0.25rem;
+  text-shadow: none;
+}
+
+/* Header background and text */
+.ui-datepicker-header {
+  background-color: #ea580c; /* a darker orange */
+  border: none;
+  color: white;
+  font-weight: 700;
+}
+
+/* Navigation arrows color */
+.ui-datepicker-prev span,
+.ui-datepicker-next span {
+  color: white !important;
+}
+
+
+        /* Custom animations and effects */
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .service-card img {
+            transition: all 0.4s ease;
+            filter: brightness(0.9);
+        }
+        
+        .service-card:hover img {
+            filter: brightness(1.1) saturate(1.2);
+            transform: scale(1.05);
+        }
+        
+        .card-overlay {
+            background: linear-gradient(135deg, rgba(234, 88, 12, 0.9) 0%, rgba(194, 65, 12, 0.95) 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover .card-overlay {
+            opacity: 1;
+        }
+        
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Staggered animation delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        
+        /* Premium gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #ea580c 0%, #c2410c 50%, #9a3412 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Custom hover effects for buttons */
+        .cta-button {
+            background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(234, 88, 12, 0.3);
+        }
+        
+        .cta-button:hover {
+            box-shadow: 0 8px 25px rgba(234, 88, 12, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive image aspect ratio */
+        .aspect-video {
+            aspect-ratio: 16 / 9;
+        }
+        
+        @media (max-width: 768px) {
+            .aspect-video {
+                aspect-ratio: 4 / 3;
+            }
+        }
+
+
+/* booking drop down */
+.booking-dropdown > div {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.booking-dropdown:hover > div,
+.booking-dropdown:focus-within > div,
+.booking-dropdown > div:hover {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto;
+}
